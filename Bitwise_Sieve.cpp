@@ -1,4 +1,5 @@
 //Bitwise Sieve
+
 #include <bits/stdc++.h>
 #define ll long long
 #define pb push_back
@@ -17,11 +18,9 @@ bool checkBit(int index, int bit)           //a function that checks the status 
                                             whole 32 bit data and bit provides 1 in the desired position
                                             and 0 in other positions.*/
                                     
-bool setBit(int index, int bit)             //a function that sets the status of the number 1
+int setBit(int index, int bit)             //a function that sets the status of the number 1
 {
-    index = index | (1 << bit);
-    // cout << index << endl;
-    return index;
+    return index = index | (1 << bit);
 }                                           /*index decides the array index, bit decides the bit
                                             location in that particular index. index provides the
                                             whole 32 bit data and bit provides 1 in the desired position
@@ -34,11 +33,10 @@ void sieve(int n)
 
     for (i = 3; i * i <= N; i += 2)
     {
-
         if (!checkBit(flag[i/32], i % 32))
         {
-            for (j = i * i; j <= N; j += i)
-                flag[j / 32] = setBit(flag[j / 32], j % 32);
+            for (j = i * i; j <= N; j += i * 2)
+                    flag[j / 32] = setBit(flag[j / 32], j % 32);
         }
     }                                       
                                             /* i.e. if 2 is a composite number, then flag[2/32][2%32] = 0.
@@ -58,7 +56,7 @@ void sieve(int n)
                                             */
 
 
-    puts("2");                              //printing the prime numbers
+    cout << 2 << endl;                             //printing the prime numbers
     for(i = 3; i <= n; i+=2){
         if(!checkBit(flag[i/32], i%32)){
             cout << i << endl;
